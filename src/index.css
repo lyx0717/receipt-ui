@@ -1,0 +1,275 @@
+/* ══════════════════════════════════════════
+   RECEIPT UI — Warm Editorial Aesthetic
+   ══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Body: warm off-white with grain texture ── */
+body {
+  background: #FAF8F5;
+  font-family: 'DM Mono', 'SF Mono', Menlo, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ── Scene container ── */
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ── Title ── */
+.title-block {
+  position: fixed;
+  top: 40px;
+  left: 48px;
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeSlideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.title {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 600;
+  color: #2A2520;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.title em {
+  font-style: italic;
+  font-weight: 400;
+  color: #8C7B6B;
+}
+
+.subtitle {
+  margin-top: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: #B5A898;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Interaction hints (bottom) ── */
+.hints {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  pointer-events: none;
+  animation: fadeSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
+}
+
+.hint-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: #C4B8AA;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.hint-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #D4C8BA;
+  flex-shrink: 0;
+}
+
+.hint-sep {
+  width: 1px;
+  height: 12px;
+  background: #E0D6CC;
+  flex-shrink: 0;
+}
+
+/* ── Version badge (bottom-right corner) ── */
+.version-badge {
+  position: fixed;
+  bottom: 34px;
+  right: 44px;
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeSlideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+}
+
+.version-badge span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: #D4C8BA;
+  letter-spacing: 0.1em;
+}
+
+/* ── Physics tag (top-right corner) ── */
+.physics-tag {
+  position: fixed;
+  top: 44px;
+  right: 44px;
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeSlideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.physics-tag span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: #C4B8AA;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── Loading overlay ── */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FAF8F5;
+  animation: fadeOut 0.6s ease 2s forwards;
+}
+
+.loading-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: #B5A898;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.loading-bar {
+  width: 80px;
+  height: 1px;
+  background: #E8DED4;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 1px;
+}
+
+.loading-bar::after {
+  content: '';
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: #A89888;
+  animation: loadSlide 1.2s ease-in-out infinite;
+}
+
+/* ── Decorative corner frame ── */
+.corner-frame {
+  position: fixed;
+  inset: 24px;
+  z-index: 5;
+  pointer-events: none;
+  border: 1px solid rgba(180, 168, 152, 0.12);
+  border-radius: 2px;
+  animation: frameFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes loadSlide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+@keyframes frameFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .title-block {
+    top: 24px;
+    left: 24px;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .physics-tag {
+    top: 28px;
+    right: 24px;
+  }
+  .version-badge {
+    bottom: 24px;
+    right: 24px;
+  }
+  .corner-frame {
+    inset: 14px;
+  }
+}
