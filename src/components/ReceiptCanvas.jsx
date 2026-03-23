@@ -4,9 +4,9 @@ import ClothSimulation from '../physics/ClothSimulation';
 import createReceiptTexture from '../utils/receiptTexture';
 
 /* ── Receipt dimensions ── */
-const RW = 0.07;   // width  (meters)
+const RW = 0.14;   // width  (meters)
 const RH = 0.20;   // height (meters)
-const NX = 20;     // grid cols
+const NX = 25;     // grid cols
 const NY = 50;     // grid rows
 
 export default function ReceiptCanvas({ className }) {
@@ -34,8 +34,8 @@ export default function ReceiptCanvas({ className }) {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xFAF8F5);
 
-    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.01, 50);
-    camera.position.set(0, 0.02, 0.48);
+    const camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 0.01, 50);
+    camera.position.set(0, 0.02, 0.55);
 
     const lookTarget = new THREE.Vector3(0, -0.09, 0);
     camera.lookAt(lookTarget);
@@ -51,10 +51,10 @@ export default function ReceiptCanvas({ className }) {
     sun.shadow.mapSize.set(1024, 1024);
     sun.shadow.camera.near = 0.01;
     sun.shadow.camera.far = 3;
-    sun.shadow.camera.left = -0.3;
-    sun.shadow.camera.right = 0.3;
-    sun.shadow.camera.top = 0.3;
-    sun.shadow.camera.bottom = -0.3;
+    sun.shadow.camera.left = -0.4;
+    sun.shadow.camera.right = 0.4;
+    sun.shadow.camera.top = 0.4;
+    sun.shadow.camera.bottom = -0.4;
     sun.shadow.bias = -0.0008;
     sun.shadow.radius = 4;
     scene.add(sun);
@@ -155,7 +155,7 @@ export default function ReceiptCanvas({ className }) {
     let orbitStartY = 0;
     let orbitTheta = 0;
     let orbitPhi = 0.05;
-    const orbitRadius = 0.48;
+    const orbitRadius = 0.55;
 
     /* ── Helpers ── */
 
